@@ -3,7 +3,7 @@ writeChannelID = 265499;
 writeAPIKey = 'C8UESNM89C3EL6L5';
 readAPIKey='ISRW5Q0XOD24H1W5';
 % Specify the url containing information on Boston Harbor traffic
-data =thingSpeakRead(writeChannelID,'Location', true,'OutputFormat', 'table');
+data =thingSpeakRead(writeChannelID,'Fields',[4 5],'OutputFormat', 'table');
 summary(data);
 url = sprintf('http://api.openweathermap.org/v3/uvi/%d,%d/current.json?appid=c65f6a821e225805108976097d2f5e3b',data.Latitude,data.Longitude);
 %url='http://samples.openweathermap.org/v3/uvi/40.7,-74.2/current.json?appid=b1b15e88fa797225412429c1c50c122a1';
@@ -26,11 +26,11 @@ fix(c)
 if (c(4)>=11 && c(4)<=13)
 	UVI = UVI
 elseif (c(4)>=13 && c(4)<=15)
-	UVI = fix(UVI*0.75)
+	UVI = UVI*0.75
 elseif ((c(4)>=8 && c(4)<=11)||(c(4)>=15 && c(4)<=17))
-	UVI = fix(UVI*0.5)
+	UVI = UVI*0.5
 elseif ((c(4)>=4 && c(4)<=8)||(c(4)>=17 && c(4)<=19))
-	UVI = fix(UVI*0.25)
+	UVI = UVI*0.25
 else
 	UVI = 0
 end
